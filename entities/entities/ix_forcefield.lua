@@ -219,13 +219,17 @@ else
 			data.filter = self
 		local trace = util.TraceLine(data)
 
+	        local verts = {
+	            {pos = Vector(0, 0, -25)},
+	            {pos = Vector(0, 0, 150)},
+	            {pos = self:WorldToLocal(trace.HitPos) + Vector(0, 0, 150)},
+	            {pos = self:WorldToLocal(trace.HitPos) + Vector(0, 0, 150)},
+	            {pos = self:WorldToLocal(trace.HitPos) - Vector(0, 0, 25)},
+	            {pos = Vector(0, 0, -25)}
+	        }
+	
+	        self:PhysicsFromMesh(verts)
 		self:EnableCustomCollisions(true)
-		self:PhysicsInitConvex({
-			vector_origin,
-			Vector(0, 0, 150),
-			trace.HitPos + Vector(0, 0, 150),
-			trace.HitPos
-		})
 	end
 
 	function ENT:Draw()
